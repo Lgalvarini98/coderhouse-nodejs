@@ -4,9 +4,9 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "build": "node ./tables/table_product.js",
-    "buildA": "node ./tables/table_msg.js",
-    "start": "nodemon ./src/server.js --ext js",
+    "build": "node ./migrations/table_product.js",
+    "buildA": "node ./migrations/table_message.js",
+    "start": "nodemon ./server.js --ext js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -31,6 +31,7 @@
     "normalizr": "^3.6.2",
     "passport": "^0.6.0",
     "passport-local": "^1.0.0",
+    "pg": "^8.9.0",
     "socket.io": "^4.5.4",
     "sqlite3": "^5.1.2"
   },

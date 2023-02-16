@@ -13,6 +13,13 @@ function generateProducts() {
   return products;
 }
 
-module.exports = {
-  generateProducts,
-};
+const productFaker = generateProducts();
+productFaker.map((objeto) => {
+  knexMariaDB("product")
+    .insert(objeto)
+    .then(() => console.log("productFaker inserted"))
+    .catch((err) => {
+      console.log(err);
+      throw err;
+    });
+});

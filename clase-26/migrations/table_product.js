@@ -5,7 +5,7 @@ knex.schema
   .createTable("product", (table) => {
     table.increments("id");
     table.string("title");
-    table.integer("price");
+    table.string("price");
     table.string("thumbnail");
   })
   .then(() => console.log("tabla creada"))
@@ -13,6 +13,4 @@ knex.schema
     console.log(err);
     throw err;
   })
-  .finally(() => {
-    knex.destroy();
-  });
+  .finally(() => knex.destroy());
