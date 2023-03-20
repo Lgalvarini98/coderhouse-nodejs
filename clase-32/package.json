@@ -1,0 +1,51 @@
+{
+  "name": "clase-16",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "build": "node ./migrations/table_product.js",
+    "buildA": "node ./migrations/table_message.js",
+    "start": "nodemon ./server.js --ext js",
+    "fork": "nodemon ./server.js --mode fork",
+    "cluster": "nodemon ./server.js --mode cluster",
+    "foreverFork": "forever start -c node ./server.js --mode fork --uid my-server-fork",
+    "foreverCluster": "forever start -c node ./server.js --mode cluster --uid my-server-cluster",
+    "pm2Fork": "pm2 start ./server.js --name=my-server --fork --watch",
+    "pm2Cluster": "pm2 start ./server.js --name=my-server -i 4 --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.2.1",
+    "bcrypt": "^5.1.0",
+    "compression": "^1.7.4",
+    "connect-mongo": "^4.6.0",
+    "cookie-parser": "^1.4.6",
+    "crypto": "^1.0.1",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-handlebars": "^6.0.6",
+    "express-session": "^1.17.3",
+    "firebase-admin": "^11.4.0",
+    "knex": "^2.3.0",
+    "mongoose": "^6.8.4",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.3.3",
+    "nginx": "^1.0.8",
+    "nginx-conf": "^2.1.0",
+    "nodemon": "^2.0.20",
+    "normalizr": "^3.6.2",
+    "passport": "^0.6.0",
+    "passport-local": "^1.0.0",
+    "pg": "^8.9.0",
+    "socket.io": "^4.5.4",
+    "sqlite3": "^5.1.2",
+    "winston": "^3.8.2"
+  },
+  "devDependencies": {
+    "faker": "^5.5.3"
+  }
+}
