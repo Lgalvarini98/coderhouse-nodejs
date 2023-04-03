@@ -1,70 +1,24 @@
 require("dotenv").config();
+
+const { Server: HttpServer } = require("http");
+const { Server: IOServer } = require("socket.io");
+const { engine } = require("express-handlebars");
+
 const express = require("express");
 const app = express();
 
-const { Server: HttpServer } = require("http");
-const httpServer = new HttpServer(app);
-
-const { Server: IOServer } = require("socket.io");
-const io = new IOServer(httpServer);
-
-const { normalize, schema } = require("normalizr");
-const { engine } = require("express-handlebars");
-const cookieParser = require("cookie-parser");
 const MongoStore = require("connect-mongo");
-
 const session = require("express-session");
 const mongoose = require("mongoose");
+
+const httpServer = new HttpServer(app);
+const io = new IOServer(httpServer);
+const cookieParser = require("cookie-parser");
+
 const advancedOptions = { useNewUrlParser: true, useUnifiedTopology: true };
 
-// ------------------ AWS ------------------
-
-// const AWS = require("aws-sdk");
-
-// AWS.config.update({
-//   region: "us-east-1",
-// });
-
-// const sns = new AWS.SNS();
-// const SNS_TOPIC_ARN = ARN_AWS; // .env
-
-// const dynamodb = new AWS.DynamoDB.DocumentClient();
-// const TABLE_NAME = "product-inventory";
-
-// ------------------ /AWS ------------------
-
-// ------------------ twilio ------------------
-
-// const twilio = require("twilio");
-
-// const accountSid = "AC0f8321dff6a9d760e0ebb1c52e157373";
-// const authToken = "623d533e2d3c70bb42d0094dcb55e348";
-// const client = require("twilio")(accountSid, authToken);
-
-// try {
-//   const options = {
-//     body: "Wsp desde node",
-//     from: "whatsapp:+14155238886",
-//     to: "whatsapp:+5492604404295",
-//   };
-
-//   const message = client.messages.create(options);
-//   console.log(message);
-// } catch (error) {
-//   console.log(error);
-// }
-
-// ------------------ /twilio ------------------
-
-// ------------------ faker ------------------
-const { options } = require("./options/config");
-const knexMariaDB = require("knex")(options);
-
-const randomsRouter = require("./src/routes/randoms");
-
-app.use("/api/randoms", randomsRouter);
-
-// ---------------------------- /FAKER ----------------------------
+const { getMessages, createMessage, normalizerMsg } = require("./src/utils/messages");
+const { getProducts, createProduct } = require("./src/utils/products");
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -86,8 +40,10 @@ app.use(
   })
 );
 
+// Rutas permitidas sin comprobación de sesión
+const allowedRoutes = ["/login", "/signup"];
 app.use((req, res, next) => {
-  if (req.session.user || req.url == "/login" || req.url == "/signup") {
+  if (req.session.user || allowedRoutes.includes(req.url)) {
     next();
   } else {
     res.status(401).redirect("/login");
@@ -103,137 +59,67 @@ app.engine("handlebars", engine(handlebarsConfig));
 app.set("views", "./views");
 app.set("view engine", "handlebars");
 
-//*******************************************************************//
-// ROUTES:
+// ------------------------- ROUTES -------------------------
+
 const router = require("./src/routes/router");
 app.use(router);
 
-//*******************************************************************//
-// ------------------- FIREBASE ----------------------
-var admin = require("firebase-admin");
-var serviceAccount = require(process.env.CREDENTIAL_PATH);
+// ------------------ RANDOM ------------------
 
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-});
+const randomsRouter = require("./src/routes/randoms");
+app.use("/api/randoms", randomsRouter);
 
-const db = admin.firestore();
-const query = db.collection("messages").orderBy("date", "asc");
-const queryCollection = db.collection("messages");
-// ------------------- /FIREBASE ----------------------
+// ------------------ AWS ------------------
 
-// ------------------- NGINX ----------------------
+// const AWS = require("aws-sdk");
 
-// ------------------- /NGINX ----------------------
+// AWS.config.update({
+//   region: "us-east-1",
+// });
 
-// ------------------------- MENSAJES -------------------------
+// const sns = new AWS.SNS();
+// const SNS_TOPIC_ARN = process.env.ARN_AWS; // .env
+
+// const dynamodb = new AWS.DynamoDB.DocumentClient();
+// const TABLE_NAME = "product-inventory";
+
+// module.exports = {
+//   sns,
+//   SNS_TOPIC_ARN,
+//   dynamodb,
+//   TABLE_NAME,
+// };
+
+// const params = {
+//   TableName: TABLE_NAME,
+// };
+
+// ------------------------- MENSAJES Y PRODUCTOS -------------------------
+
 io.on("connection", async (socket) => {
-  console.log("El usuario", socket.id, "se ha conectado");
-
-  socket.on("disconnect", () => {
-    console.log("El usuario", socket.id, "se ha desconectado");
-  });
-
-  // ---------------------- FIREBASE MSG ----------------------
-  const querySnapshot = await query.get();
-  let docs = querySnapshot.docs;
-
-  let response = docs.map((doc) => ({
-    id: doc.id,
-    author: {
-      id: doc.data().author.id,
-      nombre: doc.data().author.nombre,
-      apellido: doc.data().author.apellido,
-      edad: doc.data().author.edad,
-      alias: doc.data().author.alias,
-      avatar: doc.data().author.avatar,
-    },
-    text: doc.data().text,
-    date: doc.data().date,
-  }));
-
-  // ---------------------- NORMALIZR ----------------------
-
-  const authorSchema = new schema.Entity("author");
-  const msgSchema = new schema.Entity(
-    "messages",
-    {
-      author: authorSchema,
-    },
-    { idAttribute: "id" }
-  );
-
-  let normalizedMsg = normalize(response, [msgSchema]);
-
-  let dataSize = JSON.stringify(response).length;
-  let dataNormSize = JSON.stringify(normalizedMsg).length;
-  let result = 100 - (dataNormSize * 100) / dataSize;
-
+  // ---------------------- MENSAJES ----------------------
+  let response = await getMessages();
+  const { normalizedMsg, result } = normalizerMsg(response, true);
   socket.emit("messages", normalizedMsg, result);
 
-  // ---------------------- NORMALIZR ----------------------
-
-  // ---------------------- FIREBASE MSG ----------------------
-
-  knexMariaDB
-    .from("product")
-    .select("*")
-    .then((data) => socket.emit("productos", data));
-
   socket.on("newMessage", async (data) => {
-    let newMsg = {
-      ...data,
-      date: new Date().toLocaleString(),
-    };
-
-    // ---------------------- FIREBASE NEW MSG ----------------------
-    const doc = queryCollection.doc();
-    await doc.create(newMsg);
-
-    const querySnapshot = await query.get();
-    let docs = querySnapshot.docs;
-
-    let response = docs.map((doc) => ({
-      id: doc.id,
-      author: {
-        id: doc.data().author.id,
-        nombre: doc.data().author.nombre,
-        apellido: doc.data().author.apellido,
-        edad: doc.data().author.edad,
-        alias: doc.data().author.alias,
-        avatar: doc.data().author.avatar,
-      },
-      text: doc.data().text,
-      date: doc.data().date,
-    }));
-    // ---------------------- NORMALIZR NEW MSG ----------------------
-    let normalizedMsg = normalize(response, [msgSchema]);
-    // ---------------------- NORMALIZR NEW MSG ----------------------
-
-    socket.emit("messages", normalizedMsg, result);
-    // ---------------------- FIREBASE NEW MSG ----------------------
+    createMessage({ ...data, date: new Date().toLocaleString() });
+    let response = await getMessages();
+    socket.emit("messages", normalizerMsg(response, false).normalizedMsg, result);
   });
 
-  socket.on("newProduct", (product) => {
-    knexMariaDB("product")
-      .insert(product)
-      .then(() => console.log("product inserted"))
-      .catch((err) => {
-        console.log(err);
-        throw err;
-      });
+  // ---------------------- PRODUCTOS ----------------------
+  socket.emit("productos", await getProducts());
 
-    knexMariaDB
-      .from("product")
-      .select("*")
-      .then((data) => socket.emit("productos", data));
+  socket.on("newProduct", async (product) => {
+    createProduct(product);
+    socket.emit("productos", await getProducts());
   });
 });
 
 // ------------------------------------------------------------
-
-const server = httpServer.listen(8080, async () => {
-  await mongoose.connect("mongodb+srv://luciano:otxv1s9X4q9qO8e1@cluster0.w6djkta.mongodb.net/test");
+const server = httpServer.listen(8080, () => {
+  mongoose.connect(process.env.MONGO_PATH);
   console.log("Servidor corriendo");
 });
 server.on("error", (err) => console.log(`Error: ${err}`));
