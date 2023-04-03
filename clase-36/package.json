@@ -19,6 +19,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "aws-sdk": "^2.1349.0",
     "axios": "^1.2.1",
     "bcrypt": "^5.1.0",
     "compression": "^1.7.4",

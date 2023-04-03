@@ -8,6 +8,7 @@ const options = {
     database: "test",
   },
 };
+
 module.exports = {
   options,
 };

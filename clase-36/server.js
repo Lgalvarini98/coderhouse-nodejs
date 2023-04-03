@@ -71,29 +71,6 @@ app.use("/api/randoms", randomsRouter);
 
 // ------------------ AWS ------------------
 
-// const AWS = require("aws-sdk");
-
-// AWS.config.update({
-//   region: "us-east-1",
-// });
-
-// const sns = new AWS.SNS();
-// const SNS_TOPIC_ARN = process.env.ARN_AWS; // .env
-
-// const dynamodb = new AWS.DynamoDB.DocumentClient();
-// const TABLE_NAME = "product-inventory";
-
-// module.exports = {
-//   sns,
-//   SNS_TOPIC_ARN,
-//   dynamodb,
-//   TABLE_NAME,
-// };
-
-// const params = {
-//   TableName: TABLE_NAME,
-// };
-
 // ------------------------- MENSAJES Y PRODUCTOS -------------------------
 
 io.on("connection", async (socket) => {
