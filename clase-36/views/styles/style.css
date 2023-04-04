@@ -160,6 +160,11 @@ nav {
   column-gap: 10px;
 }
 
+.table th,
+.table td {
+  text-align: center;
+}
+
 /* ------------------------ Profile ------------------------ */
 
 .profile {
