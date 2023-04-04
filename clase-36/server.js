@@ -15,8 +15,6 @@ const httpServer = new HttpServer(app);
 const io = new IOServer(httpServer);
 const cookieParser = require("cookie-parser");
 
-const passport = require("passport");
-
 const advancedOptions = { useNewUrlParser: true, useUnifiedTopology: true };
 
 const { getMessages, createMessage, normalizerMsg } = require("./src/utils/messages");
@@ -72,9 +70,6 @@ const randomsRouter = require("./src/routes/randoms");
 app.use("/api/randoms", randomsRouter);
 
 // ------------------ AWS ------------------
-
-// app.use(passport.initialize());
-// app.use(passport.session());
 
 // ------------------------- MENSAJES Y PRODUCTOS -------------------------
 

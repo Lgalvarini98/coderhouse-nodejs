@@ -1,30 +1,19 @@
 const User = require("../models/Users");
 
-async function findOneUser(username) {
-  return await User.findOne({ username });
+async function findOneUser(email) {
+  return await User.findOne({ email });
 }
 
-async function createUser(username, password) {
+async function createUser(email, password, name, address, age, phone, photo) {
   return await User.create({
-    username,
+    email,
     password,
+    name,
+    address,
+    age,
+    phone,
+    photo,
   });
 }
-
-// async function findOneUser(email) {
-//   return await User.findOne({ email });
-// }
-
-// async function createUser(email, password, name, address, age, phone, photo) {
-//   return await User.create({
-//     email,
-//     password,
-//     name,
-//     address,
-//     age,
-//     phone,
-//     photo,
-//   });
-// }
 
 module.exports = { findOneUser, createUser };
