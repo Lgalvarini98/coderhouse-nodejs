@@ -1,15 +1,24 @@
 <div class="userLogin">
   <form action="/logout" method="post">
-    <div class="divLogout">
-      <h2>Bienvenido {{email}}</h2>
-      <button type="submit" class="btn btn-warning ps-5 pe-5 ms-3">
-        Desloguear
-      </button>
+    <div class="divNav">
+      <h2>Bienvenido
+        <span>
+          {{email}}
+        </span></h2>
+      <div class="navbar">
+        <nav>
+          <a href="/profile" class="btn btn-primary">Perfil</a>
+          <a href="/productos" class="btn btn-primary">Productos</a>
+          <button type="submit" class="btn btn-danger ps-5 pe-5 ms-3">
+            Desloguear
+          </button>
+        </nav>
+      </div>
     </div>
   </form>
 </div>
-<div class="formProductos">
 
+<div class="formProductos">
   <h2>Cargar producto</h2>
   <form onsubmit="return addProduct(this)">
     <div class="mb-3 row">

@@ -16,7 +16,7 @@ body h1 {
   flex-direction: column;
   width: 600px;
   height: 280px;
-  margin-bottom: 5px;
+  margin-bottom: 4px;
   padding: 5px;
   border: 1px solid;
   border-radius: 10px;
@@ -24,7 +24,7 @@ body h1 {
 }
 
 .listProduct {
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .msgSection {
@@ -54,7 +54,7 @@ body h1 {
   height: 275px;
   border: 1px solid rgb(100, 100, 100);
   border-radius: 5px;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .mensaje {
@@ -110,7 +110,7 @@ em {
   align-items: center;
   justify-content: center;
   grid-column-start: span 2;
-  width: 100%;
+  width: 100vw;
 }
 
 .login {
@@ -125,13 +125,22 @@ em {
   color: black;
 }
 
-.divLogout {
+.divNav {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   background-color: rgb(159, 231, 171);
   padding: 0 10px;
   border-radius: 10px;
+  width: 90vw;
+}
+
+.divNav span {
+  color: rgb(84, 118, 168);
+}
+
+.divLogout {
+  display: flex;
 }
 
 .info {
@@ -144,4 +153,66 @@ em {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+}
+
+nav {
+  display: flex;
+  column-gap: 10px;
+}
+
+/* ------------------------ Profile ------------------------ */
+
+.profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 600px;
+  height: 100%;
+  max-height: 400px;
+  padding: 10px;
+  font-size: 18px;
+  background-color: rgb(249, 229, 204);
+  grid-column-start: span 2;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.profile a {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+.profile__title {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+.profile__info {
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  text-align: start;
+  width: 80%;
+}
+
+.profile__info-label {
+  display: inline-block;
+  font-weight: bold;
+  width: 100px;
+  justify-content: flex-start;
+}
+
+.profile__info-value {
+  display: inline-block;
+  justify-content: flex-end;
+}
+
+.profile__photo {
+  margin-top: 20px;
+}
+
+.profile__photo-image {
+  display: block;
+  margin: auto;
 }

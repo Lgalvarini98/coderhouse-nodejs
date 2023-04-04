@@ -18,12 +18,7 @@ const Info = (req, res) => {
   });
 };
 
-const Main = (req, res) => {
-  res.render("main.handlebars");
-};
-
 module.exports = {
   Index,
-  Main,
   Info,
 };

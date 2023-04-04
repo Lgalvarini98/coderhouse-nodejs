@@ -1,8 +1,8 @@
 const router = require("express").Router();
 const compression = require("compression");
-const passport = require("passport");
 
-const { Index, Main, Info } = require("../controllers/ApiController");
+const { Index, Info } = require("../controllers/ApiController");
+
 const {
   getLogin,
   postLogin,
@@ -11,12 +11,16 @@ const {
   postLogout,
   getFailLogin,
   getFailSignup,
+  getProfile,
+  Main,
 } = require("../controllers/AuthController");
 
 router.get("/", Index);
 router.get("/main", Main);
 
 router.get("/info", Info);
+
+router.get("/profile", getProfile);
 
 router.get("/infozip", compression(), Info);
 

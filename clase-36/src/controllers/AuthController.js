@@ -1,4 +1,5 @@
-const { signup, login } = require("../service/AuthService");
+const { signup, login, profile } = require("../service/AuthService");
+let userMail = null;
 
 const getLogin = (req, res) => {
   res.render("login.handlebars");
@@ -8,6 +9,7 @@ const postLogin = async (req, res) => {
   const response = await login(req.body.email, req.body.password, req);
   if (response.success) res.render("main.handlebars", { email: req.body.email });
   else getLogin(req, res);
+  userMail = req.body.email;
 };
 
 const getSignup = (req, res) => {
@@ -27,6 +29,7 @@ const postSignup = async (req, res) => {
   );
   if (response.success) res.render("main.handlebars", { email: req.body.email });
   else getSignup(req, res);
+  userMail = req.body.email;
 };
 
 const postLogout =
@@ -43,6 +46,17 @@ const postLogout =
 const getFailLogin = (req, res) => res.render("faillogin.handlebars");
 const getFailSignup = (req, res) => res.render("failsignup.handlebars");
 
+const getProfile = async (req, res) => {
+  const response = await profile();
+  const { email, name, address, age, phone, photo } = response;
+
+  res.render("profileInfo.handlebars", { email, name, address, age, phone, photo });
+};
+
+const Main = (req, res) => {
+  res.render("main.handlebars", { email: userMail });
+};
+
 module.exports = {
   getLogin,
   postLogin,
@@ -51,4 +65,6 @@ module.exports = {
   postLogout,
   getFailLogin,
   getFailSignup,
+  getProfile,
+  Main,
 };
