@@ -47,7 +47,7 @@ async function login(username, password, req) {
 //   }
 // }
 
-// async function login(username, password, req) {
+// async function login(email, password, req) {
 //   try {
 //     const user = await findOneUser(email);
 

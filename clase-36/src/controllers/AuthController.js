@@ -20,10 +20,18 @@ const postSignup = async (req, res) => {
   else getSignup(req, res);
 };
 
+// const getLogin = (req, res) => {
+//   res.render("login.handlebars");
+// };
+
 // const postLogin = async (req, res) => {
 //   const response = await login(req.body.email, req.body.password, req);
 //   if (response.success) res.render("main.handlebars", { name: req.body.name });
 //   else getLogin(req, res);
+// };
+
+// const getSignup = (req, res) => {
+//   res.render("register.handlebars");
 // };
 
 // const postSignup = async (req, res) => {

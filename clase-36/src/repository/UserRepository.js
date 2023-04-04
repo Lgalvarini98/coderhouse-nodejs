@@ -15,7 +15,7 @@ async function createUser(username, password) {
 //   return await User.findOne({ email });
 // }
 
-// async function createUser(username, password) {
+// async function createUser(email, password, name, address, age, phone, photo) {
 //   return await User.create({
 //     email,
 //     password,
@@ -23,7 +23,7 @@ async function createUser(username, password) {
 //     address,
 //     age,
 //     phone,
-//     photo
+//     photo,
 //   });
 // }
 
