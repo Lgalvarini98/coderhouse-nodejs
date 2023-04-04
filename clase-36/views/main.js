@@ -57,6 +57,7 @@ function renderProductList(productos) {
             <th scope="col">Nombre</th>
             <th scope="col">Precio</th>
             <th scope="col">Foto</th>
+            <th scope="col">Acciones</th>
           </tr>
         </thead>
         <tbody id="tableList">
@@ -76,6 +77,9 @@ function renderProductList(productos) {
               src="${producto.thumbnail}"
               style="width: 30px; height: 30px;"
             />
+          </td>
+          <td>
+           <button class="btn btn-success">Agregar</button>
           </td>
       </tr>
       `;

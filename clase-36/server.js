@@ -69,12 +69,11 @@ app.use(router);
 const randomsRouter = require("./src/routes/randoms");
 app.use("/api/randoms", randomsRouter);
 
-// ------------------ AWS ------------------
-
 // ------------------------- MENSAJES Y PRODUCTOS -------------------------
 
 io.on("connection", async (socket) => {
   // ---------------------- MENSAJES ----------------------
+
   let response = await getMessages();
   const { normalizedMsg, result } = normalizerMsg(response, true);
   socket.emit("messages", normalizedMsg, result);
