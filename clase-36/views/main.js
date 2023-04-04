@@ -12,11 +12,7 @@ function renderMsg(data, result) {
     { idAttribute: "id" }
   );
 
-  const denormalizeData = normalizr.denormalize(
-    data.result,
-    [msgSchema],
-    data.entities
-  );
+  const denormalizeData = normalizr.denormalize(data.result, [msgSchema], data.entities);
 
   const html = denormalizeData
     .map((msg) => {
@@ -33,7 +29,9 @@ function renderMsg(data, result) {
           `;
     })
     .join(" ");
-  document.getElementById("messages").innerHTML = html;
+  if (document.getElementById("messages")) {
+    document.getElementById("messages").innerHTML = html;
+  }
 
   let centerMsg;
 
@@ -43,14 +41,14 @@ function renderMsg(data, result) {
     centerMsg = 0;
   }
 
-  document.getElementById(
-    "centroMsg"
-  ).innerHTML = `Centro de mensajes - (Compresión: %${centerMsg})`;
+  if (document.getElementById("centroMsg")) {
+    document.getElementById("centroMsg").innerHTML = `Centro de mensajes - (Compresión: %${centerMsg})`;
+  }
 }
 
 // ------------------------- Muestra lista de productos -------------------------
 
-async function renderProductList(productos) {
+function renderProductList(productos) {
   const stock = productos.length > 0;
   const table = `
     <table class="table">

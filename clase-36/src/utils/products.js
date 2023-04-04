@@ -29,7 +29,7 @@ const createProduct = async (data) => {
     Item: data,
   };
 
-  return await dynamodb.put(params).promise();
+  await dynamodb.put(params).promise();
 };
 
 module.exports = {
