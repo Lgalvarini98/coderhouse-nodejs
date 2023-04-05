@@ -1,0 +1,42 @@
+[
+	{
+		"first_name": "Alejandro",
+		"last_name": "Perez",
+		"age": 36,
+		"birthDate": "21/05/1978",
+		"username": "aperez",
+		"id": 1
+	},
+	{
+		"first_name": "Naiara",
+		"last_name": "Nuñez",
+		"age": 16,
+		"birthDate": "21/05/1900",
+		"username": "nnunez",
+		"id": 2
+	},
+	{
+		"first_name": "Susana",
+		"last_name": "Oria",
+		"age": 43,
+		"birthDate": "21/05/1900",
+		"username": "nnunez",
+		"id": 3
+	},
+	{
+		"first_name": "Zoila",
+		"last_name": "Baca",
+		"age": 43,
+		"birthDate": "21/05/1900",
+		"username": "nnunez",
+		"id": 4
+	},
+	{
+		"first_name": "Elba",
+		"last_name": "Zurita",
+		"age": 43,
+		"birthDate": "21/05/1900",
+		"username": "nnunez",
+		"id": 5
+	}
+]
