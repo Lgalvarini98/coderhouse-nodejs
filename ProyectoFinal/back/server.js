@@ -1,7 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 
-const authController = require("./controller/authController.js");
+const authRouter = require("./routes/authRoutes.js");
 const productosController = require("./controller/productosController.js");
 const carritoController = require("./controller/carritoController.js");
 
@@ -13,8 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
 
-const athController = new authController();
-app.use("/api", athController.getRouter());
+app.use("/api", authRouter);
 
 const prdController = new productosController();
 app.use("/api", prdController.getRouter());
