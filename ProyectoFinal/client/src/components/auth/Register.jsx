@@ -15,36 +15,41 @@ const Register = () => {
     confirmPassword: "",
   });
 
-  async function handleSubmit(e) {
+  const isFormValid = () => {
+    const requiredFields = ["nombre", "apellido", "telefono", "email", "password", "confirmPassword"];
+    for (const field of requiredFields) {
+      if (!dataRegister[field]) {
+        return false;
+      }
+    }
+    return true;
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (
-      dataRegister.nombre === "" ||
-      dataRegister.apellido === "" ||
-      dataRegister.telefono === "" ||
-      dataRegister.email === "" ||
-      dataRegister.password === "" ||
-      dataRegister.confirmPassword === ""
-    )
-      return;
+    if (!isFormValid()) return;
 
     if (dataRegister.password !== dataRegister.confirmPassword) {
       alert("Las contraseñas no coinciden");
       return;
     }
 
-    const response = await axios.post(`http://localhost:8080/api/register`, dataRegister);
-    if (response.status === 200) {
-      cookies.set("token", response.data.token);
-      window.location.href = "/productos";
-    }
-  }
+    const { confirmPassword, ...data } = dataRegister;
 
-  function handleChange(e) {
-    setDataRegister({
-      ...dataRegister,
-      [e.target.name]: e.target.value,
-    });
-  }
+    try {
+      const response = await axios.post(`http://localhost:8080/api/register`, data);
+      if (response.status === 200) {
+        cookies.set("token", response.data.token);
+        window.location.href = "/productos";
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleChange = (e) => {
+    setDataRegister((prevData) => ({ ...prevData, [e.target.name]: e.target.value }));
+  };
 
   return (
     <div className="authDiv">
