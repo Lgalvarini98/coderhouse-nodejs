@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import Cookies from "universal-cookie";
 
-const AgregarACarrito = ({ data }) => {
+const AgregarACarrito = ({ data, updateCart }) => {
   const cookies = new Cookies();
 
   async function handleSubmit(e) {
@@ -17,6 +17,7 @@ const AgregarACarrito = ({ data }) => {
       .then((response) => {
         if (response.status === 200) {
           console.log("Producto agregado al carrito");
+          updateCart();
         }
       });
   }

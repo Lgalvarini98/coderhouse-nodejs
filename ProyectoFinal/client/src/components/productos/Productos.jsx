@@ -36,6 +36,10 @@ const Productos = () => {
     });
   }
 
+  const updateCart = async () => {
+    await handleGetCart();
+  };
+
   useEffect(() => {
     handleGetCart();
     handleData();
@@ -44,6 +48,7 @@ const Productos = () => {
   return (
     <div className="listaProductos">
       <Carrito data={cart} />
+
       {listProduct.length > 0 &&
         listProduct.map((product, index) => (
           <div key={index} className="producto">
@@ -68,7 +73,7 @@ const Productos = () => {
                   <Eliminar idProduct={product._id} />
                 </div>
               )}
-              <AgregarACarrito data={product} />
+              <AgregarACarrito data={product} updateCart={updateCart} />
             </div>
           </div>
         ))}
