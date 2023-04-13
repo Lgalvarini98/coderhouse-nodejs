@@ -2,6 +2,7 @@ import React from "react";
 import { Button, Col, Container, Modal, Row } from "react-bootstrap";
 import BorrarCarrito from "./BorrarCarrito";
 import DelProdCart from "./DelProdCart";
+import OrdenarCompra from "./OrdenarCompra";
 
 const ModalCart = (data, onHide) => {
   const carrito = data.data;
@@ -10,11 +11,7 @@ const ModalCart = (data, onHide) => {
       {carrito && (
         <Modal {...data} size={"xl"}>
           <Modal.Header closeButton>
-            <Modal.Title
-              style={{ width: "100%", textAlign: "center", padding: "0px" }}
-            >
-              Carrito
-            </Modal.Title>
+            <Modal.Title style={{ width: "100%", textAlign: "center", padding: "0px" }}>Carrito</Modal.Title>
           </Modal.Header>
           <Modal.Body className="show-grid">
             <Container>
@@ -28,9 +25,7 @@ const ModalCart = (data, onHide) => {
                       <h4 className="nombre bordes">
                         <strong>{product.nombre}</strong>
                       </h4>
-                      <p className="descripcion bordes">
-                        {product.descripcion}
-                      </p>
+                      <p className="descripcion bordes">{product.descripcion}</p>
                       <p className="precio bordes">
                         <strong>${product.precio}</strong>
                       </p>
@@ -44,8 +39,9 @@ const ModalCart = (data, onHide) => {
               </Row>
             </Container>
           </Modal.Body>
-          <Modal.Footer>
+          <Modal.Footer className="cartFooter">
             <BorrarCarrito />
+            <OrdenarCompra />
           </Modal.Footer>
         </Modal>
       )}

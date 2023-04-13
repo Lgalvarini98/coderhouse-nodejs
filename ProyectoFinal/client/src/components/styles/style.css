@@ -246,6 +246,12 @@ button {
   border: 1px solid;
 }
 
+.carrito button:hover {
+  cursor: pointer;
+  border: 1px solid;
+  box-shadow: 0 0 5px 0px #8e1b3d;
+}
+
 .carrito img {
   width: 35px;
   height: 35px;
@@ -282,6 +288,10 @@ button {
 .modalProdList .producto .informacion .precio,
 .modalProdList .producto .informacion .stock {
   height: 60%;
+}
+.cartFooter {
+  display: flex;
+  justify-content: space-between;
 }
 
 .borrarCarrito {
