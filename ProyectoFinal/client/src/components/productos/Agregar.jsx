@@ -17,6 +17,11 @@ const Agregar = () => {
     stock: "",
   });
 
+  const headers = {
+    "content-type": "application/json",
+    Authorization: cookies.get("token"),
+  };
+
   async function handleSubmit(e) {
     e.preventDefault();
 
@@ -28,9 +33,9 @@ const Agregar = () => {
       !(product.precio === "") &&
       !(product.stock === "")
     ) {
-      await axios.post("http://localhost:8080/api/productos", product).then((response) => {
+      await axios.post("http://localhost:8080/api/productos", product, { headers }).then((response) => {
         if (response.status === 200) {
-          navigate("/");
+          navigate("/productos");
         }
       });
     }

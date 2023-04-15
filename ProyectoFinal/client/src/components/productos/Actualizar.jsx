@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Button, Modal } from "react-bootstrap";
+import Cookies from "universal-cookie";
 
 const Actualizar = (producto) => {
+  const cookies = new Cookies();
+
   const [product, setProduct] = useState({
     nombre: "",
     descripcion: "",
@@ -11,6 +14,11 @@ const Actualizar = (producto) => {
     precio: "",
     stock: "",
   });
+
+  const headers = {
+    "content-type": "application/json",
+    Authorization: cookies.get("token"),
+  };
 
   async function handleSubmit() {
     if (
@@ -22,10 +30,7 @@ const Actualizar = (producto) => {
       !(product.stock === "")
     ) {
       await axios
-        .put(
-          "http://localhost:8080/api/productos/" + producto.producto._id,
-          product
-        )
+        .put("http://localhost:8080/api/productos/" + producto.producto._id, product, { headers })
         .then((response) => {
           if (response.status === 200) {
             console.log(product);
@@ -35,14 +40,10 @@ const Actualizar = (producto) => {
   }
 
   function handleChange(e) {
-    const { target } = e;
-    const { name, value } = target;
-
-    const newValues = {
+    setProduct({
       ...product,
-      [name]: value,
-    };
-    setProduct(newValues);
+      [e.target.name]: e.target.value,
+    });
   }
 
   useEffect(() => {
@@ -57,11 +58,7 @@ const Actualizar = (producto) => {
 
   return (
     <div>
-      <Button
-        variant="dark"
-        type="submit"
-        onClick={handleShow}
-      >
+      <Button variant="dark" type="submit" onClick={handleShow}>
         Actualizar
       </Button>
 

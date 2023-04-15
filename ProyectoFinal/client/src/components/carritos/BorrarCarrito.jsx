@@ -7,16 +7,19 @@ const BorrarCarrito = () => {
   const cookies = new Cookies();
   const navigate = useNavigate();
 
+  const headers = {
+    "content-type": "application/json",
+    Authorization: cookies.get("token"),
+  };
+
   async function handleSubmit(e) {
     e.preventDefault();
 
-    await axios
-      .delete(`http://localhost:8080/api/carrito/${cookies.get("cart")}`)
-      .then((response) => {
-        if (response.status === 200) {
-          navigate("/");
-        }
-      });
+    await axios.delete(`http://localhost:8080/api/carrito/${cookies.get("cart")}`, { headers }).then((response) => {
+      if (response.status === 200) {
+        navigate("/");
+      }
+    });
   }
 
   return (
