@@ -40,11 +40,19 @@ a:hover {
 }
 
 .menu-navegacion a {
-  border: 1px solid;
-  font-size: 25px;
+  border: 1px solid #fff;
+  font-size: 20px;
   font-weight: 600;
-  padding: 5px 20px;
+  padding: 3px 15px;
+  margin-right: 35px;
+  border-radius: 5px;
+}
+
+.menu-navegacion a:last-child {
+  font-weight: bold;
   margin-right: 50px;
+  background-color: aliceblue;
+  color: #8e1b3d;
 }
 
 .menu-navegacion a:hover {

@@ -13,6 +13,7 @@ const NavBar = () => {
         </h4>
       </div>
       <nav className="menu-navegacion">
+        <a href="/chat">Chat</a>
         <a href="/productos">Products</a>
         {cookies.get("admin") === "true" && <a href="/form">Add product</a>}
         <a
