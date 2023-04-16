@@ -37,31 +37,6 @@ app.use("/api", prdController.getRouter());
 const carrController = new carritoController();
 app.use("/api", carrController.getRouter());
 
-io.on("connection", (socket) => {
-  console.log("Nuevo cliente conectado");
-
-  // Manejador de evento para cuando un usuario se une al chat
-  socket.on("join", (userId) => {
-    // Autenticar al usuario aquí
-    socket.join(userId);
-    console.log(`Usuario ${userId} se ha unido al chat`);
-  });
-
-  // Manejador de evento para cuando un usuario envía un mensaje
-  socket.on("sendMessage", ({ senderId, receiverId, message }) => {
-    // Guardar el mensaje en la base de datos aquí
-    console.log(`Mensaje enviado de ${senderId} a ${receiverId}: ${message}`);
-
-    // Emitir el mensaje a los usuarios correspondientes
-    socket.to(receiverId).emit("receiveMessage", { senderId, message });
-  });
-
-  // Manejador de evento para cuando un usuario se desconecta
-  socket.on("disconnect", () => {
-    console.log("Cliente desconectado");
-  });
-});
-
 server.listen(PORT, () => {
   console.log(`Servidor escuchando en el puerto ${PORT}`);
 });

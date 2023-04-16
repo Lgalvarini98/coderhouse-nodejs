@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const { hashPassword, comparePassword } = require("../utils/bcrypt");
 const { generateToken } = require("../utils/jwt");
+const nodemailer = require("nodemailer");
 
 class ContenedorMongoDB {
   constructor(connectionURI, model) {
@@ -44,6 +45,11 @@ class ContenedorMongoDB {
 
   async register(item) {
     let collection = await this.getAll();
+
+    if (collection.find((user) => user.email === item.email)) {
+      throw new Error("El correo electrónico ya está en uso");
+    }
+
     item.id = collection.length;
     const transactionObj = new this.model(item);
 

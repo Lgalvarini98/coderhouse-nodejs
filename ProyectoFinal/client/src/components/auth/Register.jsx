@@ -39,8 +39,7 @@ const Register = () => {
     try {
       const response = await axios.post(`http://localhost:8080/api/register`, data);
       if (response.status === 200) {
-        cookies.set("token", response.data.token);
-        window.location.href = "/productos";
+        window.location.href = "/";
       }
     } catch (error) {
       console.error(error);
