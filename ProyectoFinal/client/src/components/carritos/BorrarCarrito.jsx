@@ -12,25 +12,28 @@ const BorrarCarrito = () => {
     Authorization: cookies.get("token"),
   };
 
-  async function handleSubmit(e) {
-    e.preventDefault();
-
-    await axios.delete(`http://localhost:8080/api/carrito/${cookies.get("cart")}`, { headers }).then((response) => {
-      if (response.status === 200) {
-        navigate("/");
-      }
-    });
+  async function handleSubmit() {
+    await axios.delete(`http://localhost:8080/api/carrito/${cookies.get("cart")}`, { headers });
   }
 
   return (
-    <form onSubmit={handleSubmit} className="borrarCarrito">
+    <form className="borrarCarrito">
       <h6>Eliminar carrito</h6>
-      <button className="btn btn-danger" type="submit">
+      <a
+        className="btn btn-danger"
+        onClick={() => {
+          handleSubmit();
+          cookies.remove("token");
+          cookies.remove("cart");
+          cookies.remove("admin");
+        }}
+        href="/"
+      >
         <img
           src="https://cdn0.iconfinder.com/data/icons/iconoteka-stroke/24/iconoteka_shopping_cart__grocery_store_b_s-256.png"
           alt=""
         />
-      </button>
+      </a>
     </form>
   );
 };

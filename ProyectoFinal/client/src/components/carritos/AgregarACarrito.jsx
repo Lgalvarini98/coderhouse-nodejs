@@ -16,7 +16,6 @@ const AgregarACarrito = ({ data, updateCart }) => {
       .post(`http://localhost:8080/api/carrito/${cookies.get("cart")}/productos`, { productId: data._id }, { headers })
       .then((response) => {
         if (response.status === 200) {
-          console.log("Producto agregado al carrito");
           updateCart();
         }
       });

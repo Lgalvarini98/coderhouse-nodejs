@@ -1,5 +1,6 @@
 const admin = require("firebase-admin");
 const serviceAccount = require("../config/ecommercech-57b78-firebase-adminsdk-35rpz-2596fbe369.json");
+const { sendMail } = require("../utils/mails");
 
 class ContenedorFireBase {
   constructor(collectionName) {
@@ -21,7 +22,7 @@ class ContenedorFireBase {
 
   async getById(id) {
     let doc = this.query.doc(`${id}`);
-    
+
     const item = await doc.get();
     return item.data();
   }
@@ -36,6 +37,26 @@ class ContenedorFireBase {
     let doc = this.query.doc(`${id}`);
     await doc.delete();
     return "item eliminado correctamente";
+  }
+
+  async buy(products) {
+    let mailOptions = {
+      from: `Remitente ${process.env.EMAIL_USER}`,
+      to: process.env.EMAIL_USER,
+      subject: "Nueva orden de compra",
+      text: `Se ha registrado una nueva orden de compra con los siguientes productos:
+      ${products.map((product) => {
+        return `
+        Producto: ${product.nombre}
+        Codigo: ${product.codigo}
+        Precio: ${product.precio}
+        `;
+      })}
+      `,
+    };
+
+    sendMail(mailOptions);
+    return "Orden de compra exitosa";
   }
 }
 

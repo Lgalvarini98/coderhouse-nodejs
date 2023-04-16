@@ -12,11 +12,11 @@ import Chat from "./components/Chat/Chat";
 
 function App() {
   const [cookiesToken, setCookiesToken] = useState(null);
+  const cookies = new Cookies();
 
   useEffect(() => {
-    const cookies = new Cookies();
     setCookiesToken(cookies.get("token"));
-  }, []);
+  }, [cookiesToken]);
 
   return (
     <div className="App">

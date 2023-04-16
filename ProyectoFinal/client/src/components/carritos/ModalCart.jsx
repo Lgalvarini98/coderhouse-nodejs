@@ -41,7 +41,7 @@ const ModalCart = (data, onHide) => {
           </Modal.Body>
           <Modal.Footer className="cartFooter">
             <BorrarCarrito />
-            <OrdenarCompra />
+            <OrdenarCompra carrito={carrito} />
           </Modal.Footer>
         </Modal>
       )}

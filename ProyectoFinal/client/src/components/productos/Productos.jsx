@@ -16,7 +16,7 @@ const Productos = () => {
   };
 
   const [listProduct, setListProduct] = useState([]);
-  const [cart, setCart] = useState();
+  const [cart, setCart] = useState([]);
   const [admin, setAdmin] = useState(false);
 
   async function handleData() {
@@ -47,7 +47,7 @@ const Productos = () => {
 
   return (
     <div className="listaProductos">
-      <Carrito data={cart} />
+      {cart.products && cart.products.length > 0 && <Carrito data={cart} />}
 
       {listProduct.length > 0 &&
         listProduct.map((product, index) => (

@@ -7,18 +7,19 @@ class carritoController {
     this.carritoRouter = express.Router();
     this.carritoDaoFireBase = new CarritoDaoFireBase();
 
-    this.carritoRouter.get("/carrito", (req, res) => {
-      const token = req.headers.authorization;
-      if (!token) return res.status(401).json({ error: "No se ha proporcionado un token" });
+    // this.carritoRouter.get("/carrito", (req, res) => {
+    //   console.log("metodo usado");
+    //   const token = req.headers.authorization;
+    //   if (!token) return res.status(401).json({ error: "No se ha proporcionado un token" });
 
-      const user = verifyToken(token);
-      if (!user) return res.status(401).json({ error: "Token inválido" });
+    //   const user = verifyToken(token);
+    //   if (!user) return res.status(401).json({ error: "Token inválido" });
 
-      this.carritoDaoFireBase
-        .getAll()
-        .then((result) => res.json(result))
-        .catch((error) => res.json(error));
-    });
+    //   this.carritoDaoFireBase
+    //     .getAll()
+    //     .then((result) => res.json(result))
+    //     .catch((error) => res.json(error));
+    // });
 
     this.carritoRouter.get("/carrito/:id", async (req, res) => {
       const token = req.headers.authorization;
@@ -67,6 +68,7 @@ class carritoController {
         .catch((error) => res.json(error));
     });
 
+    
     this.carritoRouter.put("/carrito/:id", (req, res) => {
       const token = req.headers.authorization;
       if (!token) return res.status(401).json({ error: "No se ha proporcionado un token" });
@@ -80,6 +82,8 @@ class carritoController {
         .catch((error) => res.json(error));
     });
 
+
+    // Eliminar carrito
     this.carritoRouter.delete("/carrito/:id", (req, res) => {
       const token = req.headers.authorization;
       if (!token) return res.status(401).json({ error: "No se ha proporcionado un token" });
@@ -89,6 +93,20 @@ class carritoController {
 
       this.carritoDaoFireBase
         .delete(req.params.id)
+        .then((result) => res.json(result))
+        .catch((error) => res.json(error));
+    });
+
+    // Comprar carrito
+    this.carritoRouter.post("/carrito/:id", (req, res) => {
+      const token = req.headers.authorization;
+      if (!token) return res.status(401).json({ error: "No se ha proporcionado un token" });
+
+      const user = verifyToken(token);
+      if (!user) return res.status(401).json({ error: "Token inválido" });
+
+      this.carritoDaoFireBase
+        .buy(req.body.products)
         .then((result) => res.json(result))
         .catch((error) => res.json(error));
     });

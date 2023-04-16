@@ -275,7 +275,7 @@ button {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   column-gap: 30px;
-  row-gap: 30px;
+  row-gap: 10px;
   margin: 0;
   height: 520px;
   overflow-y: auto;
@@ -285,8 +285,7 @@ button {
 
 .modalProdList .producto {
   margin-top: 0px;
-  margin-bottom: 5px;
-  height: 500px;
+  height: 520px;
 }
 
 .modalProdList .producto img,

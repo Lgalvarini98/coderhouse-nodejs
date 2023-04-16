@@ -3,32 +3,45 @@ import axios from "axios";
 import Cookies from "universal-cookie";
 import { useNavigate } from "react-router-dom";
 
-const BorrarCarrito = () => {
+const OrdenarCompra = ({ carrito }) => {
   const cookies = new Cookies();
   const navigate = useNavigate();
 
-  async function handleSubmit(e) {
-    e.preventDefault();
+  const headers = {
+    "content-type": "application/json",
+    Authorization: cookies.get("token"),
+  };
 
-    await axios.delete(`http://localhost:8080/api/carrito/${cookies.get("cart")}`).then((response) => {
-      if (response.status === 200) {
-        alert("Compra realizada con exito");
-        navigate("/");
-      }
-    });
+  async function handleSubmit() {
+    await axios
+      .post(`http://localhost:8080/api/carrito/${cookies.get("cart")}`, carrito, { headers })
+      .then((response) => {
+        if (response.status === 200) {
+          alert("Orden de compra realizada con exito");
+        }
+      });
   }
 
   return (
-    <form onSubmit={handleSubmit} className="borrarCarrito">
+    <form className="borrarCarrito">
       <h6>Comprar</h6>
-      <button className="btn btn-success" type="submit">
+      <a
+        className="btn btn-success"
+        onClick={() => {
+          handleSubmit();
+          cookies.remove("token");
+          cookies.remove("cart");
+          cookies.remove("admin");
+        }}
+        href="/"
+      >
         <img
           src="https://cdn0.iconfinder.com/data/icons/iconoteka-stroke/24/iconoteka_shopping_cart__grocery_store_b_s-256.png"
           alt=""
         />
-      </button>
+      </a>
     </form>
   );
 };
 
-export default BorrarCarrito;
+export default OrdenarCompra;

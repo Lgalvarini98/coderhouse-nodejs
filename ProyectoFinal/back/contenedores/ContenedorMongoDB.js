@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const { hashPassword, comparePassword } = require("../utils/bcrypt");
+const { sendMail } = require("../utils/mails");
 const { generateToken } = require("../utils/jwt");
-const nodemailer = require("nodemailer");
 
 class ContenedorMongoDB {
   constructor(connectionURI, model) {
@@ -43,6 +43,7 @@ class ContenedorMongoDB {
     return transactionObj;
   }
 
+  /* ---------------------- REGISTER --------------------------- */
   async register(item) {
     let collection = await this.getAll();
 
@@ -57,9 +58,20 @@ class ContenedorMongoDB {
     transactionObj.password = hashedPassword;
 
     let saveResponse = await transactionObj.save();
+
+    let mailOptions = {
+      from: `Remitente ${process.env.EMAIL_USER}`,
+      to: process.env.EMAIL_USER,
+      subject: "Nuevo registro de usuario",
+      text: `Se ha registrado un nuevo usuario con los siguientes datos:
+            \nNombre: ${item.nombre} ${item.apellido}\nEmail: ${item.email}\nTelefono: ${item.telefono}`,
+    };
+
+    sendMail(mailOptions);
+
     return saveResponse;
   }
-
+  /* ---------------------- REGISTER --------------------------- */
   async login(item) {
     let collection = await this.getAll();
 
