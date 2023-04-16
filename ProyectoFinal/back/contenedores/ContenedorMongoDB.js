@@ -43,6 +43,11 @@ class ContenedorMongoDB {
     return transactionObj;
   }
 
+  async getByCategoria(categoria) {
+    let collection = await this.model.find({ categoria: categoria });
+    return collection;
+  }
+
   /* ---------------------- REGISTER --------------------------- */
   async register(item) {
     let collection = await this.getAll();

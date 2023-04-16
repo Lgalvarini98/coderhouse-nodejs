@@ -14,7 +14,7 @@ const Agregar = () => {
     codigo: "",
     thumbnail: "",
     precio: "",
-    stock: "",
+    categoria: "",
   });
 
   const headers = {
@@ -31,7 +31,7 @@ const Agregar = () => {
       !(product.codigo === "") &&
       !(product.thumbnail === "") &&
       !(product.precio === "") &&
-      !(product.stock === "")
+      !(product.categoria === "")
     ) {
       await axios.post("http://localhost:8080/api/productos", product, { headers }).then((response) => {
         if (response.status === 200) {
@@ -89,8 +89,8 @@ const Agregar = () => {
             />
           </div>
           <div>
-            <label className="form-label">Stock</label>
-            <input type="number" className="form-control" name="stock" value={product.stock} onChange={handleChange} />
+            <label className="form-label">Categoria</label>
+            <input type="categoria" className="form-control" name="categoria" value={product.categoria} onChange={handleChange} />
           </div>
           <button type="submit" className="btn btn-dark mb-3">
             Agregar producto

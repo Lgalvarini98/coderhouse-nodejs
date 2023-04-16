@@ -2,7 +2,6 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const socketio = require("socket.io");
 const http = require("http");
 
 const authRouter = require("./routes/authRoutes.js");
@@ -11,13 +10,11 @@ const carritoController = require("./controller/carritoController.js");
 
 const app = express();
 const server = http.createServer(app);
-const io = socketio(server);
 
 const PORT = process.env.PORT || 8080;
-const MONGO_URI = process.env.MONGO_PATH;
 
 mongoose
-  .connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(process.env.MONGO_PATH, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
     console.log("Conexión a MongoDB establecida correctamente");
   })

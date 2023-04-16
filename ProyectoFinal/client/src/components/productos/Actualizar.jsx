@@ -12,7 +12,7 @@ const Actualizar = (producto) => {
     codigo: "",
     thumbnail: "",
     precio: "",
-    stock: "",
+    categoria: "",
   });
 
   const headers = {
@@ -27,7 +27,7 @@ const Actualizar = (producto) => {
       !(product.codigo === "") &&
       !(product.thumbnail === "") &&
       !(product.precio === "") &&
-      !(product.stock === "")
+      !(product.categoria === "")
     ) {
       await axios
         .put("http://localhost:8080/api/productos/" + producto.producto._id, product, { headers })
@@ -119,12 +119,12 @@ const Actualizar = (producto) => {
               />
             </div>
             <div>
-              <label className="form-label">Stock</label>
+              <label className="form-label">Categoria</label>
               <input
-                type="number"
+                type="text"
                 className="form-control"
-                name="stock"
-                defaultValue={product.stock}
+                name="categoria"
+                defaultValue={product.categoria}
                 onChange={handleChange}
               />
             </div>

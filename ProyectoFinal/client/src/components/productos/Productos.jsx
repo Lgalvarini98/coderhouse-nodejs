@@ -63,7 +63,7 @@ const Productos = () => {
               <p className="precio bordes">
                 <strong>${product.precio}</strong>
               </p>
-              <h5 className="stock bordes">Stock: {product.stock}</h5>
+              <h5 className="stock bordes">Categoria: {product.categoria}</h5>
             </div>
 
             <div className="btnFormulario">

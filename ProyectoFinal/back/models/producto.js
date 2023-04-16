@@ -8,7 +8,7 @@ const productoSchema = new mongoose.Schema({
   codigo: { type: String, require: true, max: 255 },
   thumbnail: { type: String, require: false, max: 255 },
   precio: { type: String, require: true },
-  stock: { type: String, require: true },
+  categoria: { type: String, require: true, max: 255 },
 });
 
 module.exports = mongoose.model(productosCollection, productoSchema);

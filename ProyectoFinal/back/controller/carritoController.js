@@ -7,20 +7,7 @@ class carritoController {
     this.carritoRouter = express.Router();
     this.carritoDaoFireBase = new CarritoDaoFireBase();
 
-    // this.carritoRouter.get("/carrito", (req, res) => {
-    //   console.log("metodo usado");
-    //   const token = req.headers.authorization;
-    //   if (!token) return res.status(401).json({ error: "No se ha proporcionado un token" });
-
-    //   const user = verifyToken(token);
-    //   if (!user) return res.status(401).json({ error: "Token inválido" });
-
-    //   this.carritoDaoFireBase
-    //     .getAll()
-    //     .then((result) => res.json(result))
-    //     .catch((error) => res.json(error));
-    // });
-
+    // --------------------------------- Obtener carrito ---------------------------------
     this.carritoRouter.get("/carrito/:id", async (req, res) => {
       const token = req.headers.authorization;
       if (!token) return res.status(401).json({ error: "No se ha proporcionado un token" });
@@ -34,6 +21,7 @@ class carritoController {
         .catch((error) => res.json(error));
     });
 
+    // --------------------------------- Crear carrito ---------------------------------
     this.carritoRouter.post("/carrito", (req, res) => {
       const token = req.headers.authorization;
       if (!token) return res.status(401).json({ error: "No se ha proporcionado un token" });
@@ -52,7 +40,7 @@ class carritoController {
         .catch((error) => res.json(error));
     });
 
-    // Agregar productos al carrito
+    // --------------------------------- Agregar productos al carrito ---------------------------------
     this.carritoRouter.post("/carrito/:id/productos", (req, res) => {
       const token = req.headers.authorization;
       if (!token) return res.status(401).json({ error: "No se ha proporcionado un token" });
@@ -68,22 +56,20 @@ class carritoController {
         .catch((error) => res.json(error));
     });
 
-    
-    this.carritoRouter.put("/carrito/:id", (req, res) => {
-      const token = req.headers.authorization;
-      if (!token) return res.status(401).json({ error: "No se ha proporcionado un token" });
+    // this.carritoRouter.put("/carrito/:id", (req, res) => {
+    //   const token = req.headers.authorization;
+    //   if (!token) return res.status(401).json({ error: "No se ha proporcionado un token" });
 
-      const user = verifyToken(token);
-      if (!user) return res.status(401).json({ error: "Token inválido" });
+    //   const user = verifyToken(token);
+    //   if (!user) return res.status(401).json({ error: "Token inválido" });
 
-      this.carritoDaoFireBase
-        .update(req.params.id, req.body)
-        .then((result) => res.json(result))
-        .catch((error) => res.json(error));
-    });
+    //   this.carritoDaoFireBase
+    //     .update(req.params.id, req.body)
+    //     .then((result) => res.json(result))
+    //     .catch((error) => res.json(error));
+    // });
 
-
-    // Eliminar carrito
+    // --------------------------------- Eliminar carrito ---------------------------------
     this.carritoRouter.delete("/carrito/:id", (req, res) => {
       const token = req.headers.authorization;
       if (!token) return res.status(401).json({ error: "No se ha proporcionado un token" });
@@ -97,7 +83,7 @@ class carritoController {
         .catch((error) => res.json(error));
     });
 
-    // Comprar carrito
+    // --------------------------------- Comprar carrito ---------------------------------
     this.carritoRouter.post("/carrito/:id", (req, res) => {
       const token = req.headers.authorization;
       if (!token) return res.status(401).json({ error: "No se ha proporcionado un token" });
@@ -111,6 +97,7 @@ class carritoController {
         .catch((error) => res.json(error));
     });
 
+    // --------------------------------- Eliminar producto del carrito ---------------------------------
     this.carritoRouter.delete("/carrito/:id/productos/:id_prod", (req, res) => {
       const token = req.headers.authorization;
       if (!token) return res.status(401).json({ error: "No se ha proporcionado un token" });

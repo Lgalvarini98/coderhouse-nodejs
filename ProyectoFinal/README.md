@@ -1,9 +1,9 @@
-1- Instalar las dependencias necesarias en la carpeta "back" y en la carpet "client"
+1- Instalar las dependencias en las carpetas "back" y"client"
 2- Agregar el archivo .env en la carpeta "back" con los siguientes datos:
 
     PORT=8080
     MONGO_PATH = "ruta de acceso a mongodb"
-    CREDENTIAL_PATH = "ruta de acceso a firebase"
+    CREDENTIAL_PATH = "ruta de acceso al archivo de firebase que se guarda en la carpeta firebase"
 
     EMAIL_SERVICE = "hotmail"
     EMAIL_USER = "direccion que recibirá los mails enviados al registrar un usuario o comprar un carrito"
@@ -16,6 +16,4 @@
 3- Iniciar el proyecto con "npm start" en las carpetas back y client.
 
 4- Los usuarios registrados no son admin, si se quiere probar un usuario admin se puede registrar un usuario
-    y en la base de datos hardcodear el parametro admin a "true"
-
-
+y en la base de datos de mongo hardcodear el parametro admin a "true"
