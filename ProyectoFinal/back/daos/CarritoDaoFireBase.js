@@ -27,7 +27,6 @@ class CarritoDaoFireBase extends contenedorFireBase {
 
     cpItem.products.push(productAdd);
 
-    console.log(cpItem);
 
     await doc.update(cpItem);
   }

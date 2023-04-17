@@ -1,11 +1,8 @@
 import { useState } from "react";
 import "./auth.css";
 import axios from "axios";
-import Cookies from "universal-cookie";
 
 const Register = () => {
-  const cookies = new Cookies();
-
   const [dataRegister, setDataRegister] = useState({
     nombre: "",
     apellido: "",

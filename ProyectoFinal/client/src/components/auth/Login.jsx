@@ -23,7 +23,7 @@ const Login = () => {
     });
     const headers = {
       "content-type": "application/json",
-      Authorization: cookies.get("token"),
+      Authorization: `Bearer ${cookies.get("token")}`,
     };
 
     await axios.post("http://localhost:8080/api/carrito", {}, { headers }).then((r) => {

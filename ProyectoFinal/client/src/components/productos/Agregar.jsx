@@ -19,7 +19,7 @@ const Agregar = () => {
 
   const headers = {
     "content-type": "application/json",
-    Authorization: cookies.get("token"),
+    Authorization: `Bearer ${cookies.get("token")}`,
   };
 
   async function handleSubmit(e) {
@@ -33,6 +33,7 @@ const Agregar = () => {
       !(product.precio === "") &&
       !(product.categoria === "")
     ) {
+      product.categoria = product.categoria.toLowerCase();
       await axios.post("http://localhost:8080/api/productos", product, { headers }).then((response) => {
         if (response.status === 200) {
           navigate("/productos");
@@ -90,7 +91,13 @@ const Agregar = () => {
           </div>
           <div>
             <label className="form-label">Categoria</label>
-            <input type="categoria" className="form-control" name="categoria" value={product.categoria} onChange={handleChange} />
+            <input
+              type="categoria"
+              className="form-control"
+              name="categoria"
+              value={product.categoria}
+              onChange={handleChange}
+            />
           </div>
           <button type="submit" className="btn btn-dark mb-3">
             Agregar producto

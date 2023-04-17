@@ -11,7 +11,7 @@ class productosController {
     this.productosRouter.get("/productos", (req, res) => {
       const token = req.headers.authorization.substring(7);
       if (!token) return res.status(401).json({ error: "No se ha proporcionado un token" });
-      
+
       const user = verifyToken(token);
       if (!user) return res.status(401).json({ error: "Token inválido" });
 
@@ -22,22 +22,22 @@ class productosController {
     });
 
     // -------------------------------- Obtener la descripcion del producto --------------------------------
-    this.productosRouter.get("/productos/:id", (req, res) => {
-      const token = req.headers.authorization;
+    this.productosRouter.get("/productos/:codigo", (req, res) => {
+      const token = req.headers.authorization.substring(7);
       if (!token) return res.status(401).json({ error: "No se ha proporcionado un token" });
 
       const user = verifyToken(token);
       if (!user) return res.status(401).json({ error: "Token inválido" });
 
       this.productosDaoMongoDB
-        .getById(req.params.id)
+        .getById(req.params.codigo)
         .then((result) => res.json(result))
         .catch((error) => res.json(error));
     });
 
     // -------------------------------- Crea un producto --------------------------------
     this.productosRouter.post("/productos", (req, res) => {
-      const token = req.headers.authorization;
+      const token = req.headers.authorization.substring(7);
       if (!token) return res.status(401).json({ error: "No se ha proporcionado un token" });
 
       const user = verifyToken(token);
@@ -51,7 +51,7 @@ class productosController {
 
     // -------------------------------- Actualiza el producto --------------------------------
     this.productosRouter.put("/productos/:id", (req, res) => {
-      const token = req.headers.authorization;
+      const token = req.headers.authorization.substring(7);
       if (!token) return res.status(401).json({ error: "No se ha proporcionado un token" });
 
       const user = verifyToken(token);
@@ -64,13 +64,24 @@ class productosController {
     });
 
     // -------------------------------- Obtener los productos por categoría --------------------------------
-    this.productosRouter.get("/productos/:categoria", (req, res) => {
-      const token = req.headers.authorization;
+    this.productosRouter.get("/categorias", (req, res) => {
+      const token = req.headers.authorization.substring(7);
       if (!token) return res.status(401).json({ error: "No se ha proporcionado un token" });
-
       const user = verifyToken(token);
       if (!user) return res.status(401).json({ error: "Token inválido" });
 
+      this.productosDaoMongoDB
+        .getCategorias()
+        .then((categorias) => res.json(categorias))
+        .catch((error) => res.status(500).json({ error: "Error al obtener categorías" }));
+    });
+
+    // -------------------------------- Obtener los productos por categoría --------------------------------
+    this.productosRouter.get("/categoria/:categoria", (req, res) => {
+      const token = req.headers.authorization.substring(7);
+      if (!token) return res.status(401).json({ error: "No se ha proporcionado un token" });
+      const user = verifyToken(token);
+      if (!user) return res.status(401).json({ error: "Token inválido" });
       this.productosDaoMongoDB
         .getByCategoria(req.params.categoria)
         .then((result) => res.json(result))
@@ -79,7 +90,7 @@ class productosController {
 
     // -------------------------------- Elimina el producto --------------------------------
     this.productosRouter.delete("/productos/:id", (req, res) => {
-      const token = req.headers.authorization;
+      const token = req.headers.authorization.substring(7);
       if (!token) return res.status(401).json({ error: "No se ha proporcionado un token" });
 
       const user = verifyToken(token);

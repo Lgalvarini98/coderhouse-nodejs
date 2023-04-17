@@ -6,13 +6,14 @@ import Eliminar from "./Eliminar";
 import AgregarACarrito from "../carritos/AgregarACarrito";
 import Cookies from "universal-cookie";
 import Carrito from "../carritos/Carrito";
+import FilterByCategory from "../FilterByCategory/FilterByCategory";
 
 const Productos = () => {
   const cookies = new Cookies();
 
   const headers = {
     "content-type": "application/json",
-    Authorization: cookies.get("token"),
+    Authorization: `Bearer ${cookies.get("token")}`,
   };
 
   const [listProduct, setListProduct] = useState([]);
@@ -49,6 +50,7 @@ const Productos = () => {
     <div className="listaProductos">
       {cart.products && cart.products.length > 0 && <Carrito data={cart} />}
 
+      <FilterByCategory setListProduct={setListProduct} />
       {listProduct.length > 0 &&
         listProduct.map((product, index) => (
           <div key={index} className="producto">
@@ -77,6 +79,7 @@ const Productos = () => {
             </div>
           </div>
         ))}
+
       {listProduct.length < 1 && (
         <div>
           <h2>No hay productos</h2>

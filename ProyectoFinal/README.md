@@ -17,3 +17,32 @@
 
 4- Los usuarios registrados no son admin, si se quiere probar un usuario admin se puede registrar un usuario
 y en la base de datos de mongo hardcodear el parametro admin a "true"
+
+
+RUTAS:
+
+Ruta base: http://localhost:8080/api
+
+  Autenticación:
+
+    + /login --> ruta para iniciar sesion --> GET
+    + /register --> ruta para registrarse --> POST
+
+  Productos:
+
+    + /productos --> ruta para obtener todos los productos --> GET
+    + /productos/:codigo --> ruta para obtener un producto por codigo de producto --> GET
+    + /productos --> ruta para crear un producto --> POST
+    + /productos/:id --> ruta para actualizar un producto --> PUT
+    + /productos/categorias --> ruta para obtener todas las categorias de productos --> GET
+    + /productos/categoria/:categoria --> ruta para obtener todos los productos de una categoria --> GET
+    + /productos/:id --> ruta para eliminar un producto --> DELETE
+
+  Carrito:
+
+    + /carrito/:id --> ruta para obtener un carrito por id de carrito --> GET
+    + /carrito --> ruta para crear un carrito --> POST
+    + /carrito/:id/productos --> ruta para agregar un producto al carrito --> POST
+    + /carrito/:id --> ruta para eliminar un carrito --> DELETE
+    + /carrito/:id --> ruta para comprar un carrito --> POST
+    + /carrito/:id/productos/:id_prod --> ruta para eliminar un producto del carrito --> DELETE

@@ -9,7 +9,7 @@ class carritoController {
 
     // --------------------------------- Obtener carrito ---------------------------------
     this.carritoRouter.get("/carrito/:id", async (req, res) => {
-      const token = req.headers.authorization;
+      const token = req.headers.authorization.substring(7);
       if (!token) return res.status(401).json({ error: "No se ha proporcionado un token" });
 
       const user = verifyToken(token);
@@ -23,7 +23,7 @@ class carritoController {
 
     // --------------------------------- Crear carrito ---------------------------------
     this.carritoRouter.post("/carrito", (req, res) => {
-      const token = req.headers.authorization;
+      const token = req.headers.authorization.substring(7);
       if (!token) return res.status(401).json({ error: "No se ha proporcionado un token" });
 
       const user = verifyToken(token);
@@ -42,7 +42,7 @@ class carritoController {
 
     // --------------------------------- Agregar productos al carrito ---------------------------------
     this.carritoRouter.post("/carrito/:id/productos", (req, res) => {
-      const token = req.headers.authorization;
+      const token = req.headers.authorization.substring(7);
       if (!token) return res.status(401).json({ error: "No se ha proporcionado un token" });
 
       const user = verifyToken(token);
@@ -56,7 +56,7 @@ class carritoController {
 
     // --------------------------------- Eliminar carrito ---------------------------------
     this.carritoRouter.delete("/carrito/:id", (req, res) => {
-      const token = req.headers.authorization;
+      const token = req.headers.authorization.substring(7);
       if (!token) return res.status(401).json({ error: "No se ha proporcionado un token" });
 
       const user = verifyToken(token);
@@ -70,7 +70,7 @@ class carritoController {
 
     // --------------------------------- Comprar carrito ---------------------------------
     this.carritoRouter.post("/carrito/:id", (req, res) => {
-      const token = req.headers.authorization;
+      const token = req.headers.authorization.substring(7);
       if (!token) return res.status(401).json({ error: "No se ha proporcionado un token" });
 
       const user = verifyToken(token);
@@ -84,7 +84,7 @@ class carritoController {
 
     // --------------------------------- Eliminar producto del carrito ---------------------------------
     this.carritoRouter.delete("/carrito/:id/productos/:id_prod", (req, res) => {
-      const token = req.headers.authorization;
+      const token = req.headers.authorization.substring(7);
       if (!token) return res.status(401).json({ error: "No se ha proporcionado un token" });
 
       const user = verifyToken(token);

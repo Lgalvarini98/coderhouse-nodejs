@@ -105,9 +105,16 @@ a:hover {
 .listaProductos {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+  justify-items: center;
   column-gap: 4%;
   padding: 1% 8%;
   width: auto;
+}
+
+.categoryFilter {
+  width: 15%;
+  grid-column-start: span 4;
+  text-transform: capitalize;
 }
 
 .producto {
@@ -163,6 +170,7 @@ a:hover {
 }
 
 .stock {
+  text-transform: capitalize;
   padding: 5px 0;
 }
 

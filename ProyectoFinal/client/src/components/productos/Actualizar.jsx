@@ -17,7 +17,7 @@ const Actualizar = (producto) => {
 
   const headers = {
     "content-type": "application/json",
-    Authorization: cookies.get("token"),
+    Authorization: `Bearer ${cookies.get("token")}`,
   };
 
   async function handleSubmit() {

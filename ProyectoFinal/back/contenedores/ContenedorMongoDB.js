@@ -31,8 +31,8 @@ class ContenedorMongoDB {
   }
 
   // -------------------------------- Obtener la descripcion del producto --------------------------------
-  async getById(id) {
-    let item = await this.model.findOne({ _id: id });
+  async getById(code) {
+    let item = await this.model.findOne({ codigo: code });
     return item;
   }
 
@@ -48,10 +48,24 @@ class ContenedorMongoDB {
     return transactionObj;
   }
 
+  // -------------------------------- Obtener todas las categorias --------------------------------
+
+  async getCategorias() {
+    let collection = await this.model.find({});
+    let categorias = collection.map((item) => item.categoria);
+    categorias = categorias.filter((item, index) => categorias.indexOf(item) === index);
+    return categorias;
+  }
+
   // -------------------------------- Obtener todos los productos de una categoria --------------------------------
   async getByCategoria(categoria) {
-    let collection = await this.model.find({ categoria: categoria });
-    return collection;
+    if (categoria.toLowerCase() === "all") {
+      let collection = await this.model.find({});
+      return collection;
+    } else {
+      let collection = await this.model.find({ categoria: categoria.toLowerCase() });
+      return collection;
+    }
   }
 
   /* ---------------------- REGISTER --------------------------- */

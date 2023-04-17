@@ -9,7 +9,7 @@ const DelProdCart = (idProduct) => {
   async function handleSubmit() {
     const headers = {
       "content-type": "application/json",
-      Authorization: cookies.get("token"),
+      Authorization: `Bearer ${cookies.get("token")}`,
     };
     await axios.delete(`http://localhost:8080/api/carrito/${cookies.get("cart")}/productos/${idProduct.idProduct}`, {
       headers,
