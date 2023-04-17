@@ -322,3 +322,99 @@ button {
   width: 25px;
   height: 25px;
 }
+
+/* -------------------------------------------------------- */
+.divChat {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  height: 100%;
+  padding: 20px;
+  margin: 20px;
+  width: 60%;
+}
+
+.sectionMensajes {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow-y: auto;
+  height: 475px;
+}
+
+.mensaje {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  background-color: #fff;
+  color: #333;
+  padding: 2px;
+  margin: 5px 0;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.mensaje span,
+.miMensaje span {
+  color: #01a682;
+  font-weight: bold;
+  font-size: 15px;
+  margin: 0 10px;
+}
+
+.mensaje p,
+.miMensaje p {
+  color: #333;
+  font-size: 14px;
+  margin: 0 10px;
+}
+
+.miMensaje {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-end;
+  background-color: #dcf8c6;
+  color: #333;
+  padding: 2px;
+  margin: 5px 0;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.formChat {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  align-items: center;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.formChat input[type="text"] {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 5px 10px;
+  width: 80%;
+  font-size: 15px;
+}
+
+.formChat button[type="submit"] {
+  background-color: #01b58e;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+  width: 18%;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.formChat button[type="submit"]:hover {
+  background-color: #006847;
+}

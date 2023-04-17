@@ -8,7 +8,7 @@ import NavBar from "./components/NavBar";
 import Agregar from "./components/productos/Agregar";
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
-import Chat from "./components/Chat/Chat";
+import ChatGlobal from "./components/Chat/ChatGlobal";
 
 function App() {
   const [cookiesToken, setCookiesToken] = useState(null);
@@ -18,13 +18,25 @@ function App() {
     setCookiesToken(cookies.get("token"));
   }, [cookiesToken]);
 
+  const handleLogout = () => {
+    cookies.remove("token");
+    cookies.remove("cart");
+    cookies.remove("admin");
+  };
+
+  useEffect(() => {
+    if (location.pathname === "/") {
+      handleLogout();
+    }
+  }, [location.pathname]);
+
   return (
-    <div className="App">
+    <div className="app">
       <BrowserRouter>
         {cookiesToken && <NavBar />}
         <Routes>
           <Route path="/" element={<Login />} />
-          <Route path="/chat" element={<Chat />} />
+          <Route path="/chat" element={<ChatGlobal />} />
           <Route path="/register" element={<Register />} />
           <Route path="/productos" element={<Productos />} />
           <Route path="/form" element={<Agregar />} />

@@ -110,7 +110,7 @@ class ContenedorMongoDB {
       if (user.email === item.email) {
         const isMatch = await comparePassword(item.password, user.password);
         if (isMatch) {
-          return { token: generateToken(user), admin: user.admin };
+          return { token: generateToken(user), admin: user.admin, email: user.email };
         } else {
           return { error: "Contraseña incorrecta" };
         }

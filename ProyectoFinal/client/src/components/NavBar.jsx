@@ -16,16 +16,7 @@ const NavBar = () => {
         <a href="/chat">Chat</a>
         <a href="/productos">Products</a>
         {cookies.get("admin") === "true" && <a href="/form">Add product</a>}
-        <a
-          onClick={() => {
-            cookies.remove("token");
-            cookies.remove("cart");
-            cookies.remove("admin");
-          }}
-          href="/"
-        >
-          Logout
-        </a>
+        <a href="/">Logout</a>
       </nav>
     </header>
   );

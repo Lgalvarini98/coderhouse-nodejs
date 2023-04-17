@@ -19,6 +19,7 @@ const Login = () => {
       if (response.status === 200) {
         cookies.set("token", response.data.token);
         cookies.set("admin", response.data.admin);
+        cookies.set("email", response.data.email);
       }
     });
     const headers = {

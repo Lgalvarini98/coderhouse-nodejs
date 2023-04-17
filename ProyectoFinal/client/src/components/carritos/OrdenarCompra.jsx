@@ -25,16 +25,7 @@ const OrdenarCompra = ({ carrito }) => {
   return (
     <form className="borrarCarrito">
       <h6>Comprar</h6>
-      <a
-        className="btn btn-success"
-        onClick={() => {
-          handleSubmit();
-          cookies.remove("token");
-          cookies.remove("cart");
-          cookies.remove("admin");
-        }}
-        href="/"
-      >
+      <a className="btn btn-success" href="/">
         <img
           src="https://cdn0.iconfinder.com/data/icons/iconoteka-stroke/24/iconoteka_shopping_cart__grocery_store_b_s-256.png"
           alt=""
