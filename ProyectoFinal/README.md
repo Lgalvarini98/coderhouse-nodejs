@@ -3,7 +3,7 @@
 
     PORT=8080
     MONGO_PATH = "ruta de acceso a mongodb"
-    CREDENTIAL_PATH = "ruta de acceso al archivo de firebase que se guarda en la carpeta firebase"
+    CREDENTIAL_PATH = "../firebase/ecommercech-57b78-firebase-adminsdk-35rpz-2809b9ad85.json"
 
     EMAIL_SERVICE = "hotmail"
     EMAIL_USER = "direccion que recibirá los mails enviados al registrar un usuario o comprar un carrito"
