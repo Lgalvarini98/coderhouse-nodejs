@@ -56,6 +56,8 @@ class ContenedorFireBase {
     sendMail(mailOptions);
     return "Orden de compra exitosa";
   }
+
+  
 }
 
 module.exports = ContenedorFireBase;

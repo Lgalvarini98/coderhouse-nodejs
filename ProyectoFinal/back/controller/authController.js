@@ -1,5 +1,4 @@
 const UserDaoMongoDB = require("../daos/UsersDaoMongoDB");
-
 const userDaoMongoDB = new UserDaoMongoDB();
 
 function loginHandler(req, res) {
