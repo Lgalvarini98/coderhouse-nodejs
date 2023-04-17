@@ -9,6 +9,7 @@ class CarritoDaoFireBase extends contenedorFireBase {
   // ----------------- Agregar producto al carrito -----------------
   async addProduct(id, product) {
     const contenedorMongoDBasd = new ProductosDaoMongoDB();
+
     let productMongoDB = await contenedorMongoDBasd.getById(product.productId);
 
     let productAdd = {
@@ -26,7 +27,6 @@ class CarritoDaoFireBase extends contenedorFireBase {
     let cpItem = { ...item.data() };
 
     cpItem.products.push(productAdd);
-
 
     await doc.update(cpItem);
   }

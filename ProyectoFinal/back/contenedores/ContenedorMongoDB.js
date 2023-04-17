@@ -30,9 +30,15 @@ class ContenedorMongoDB {
     return collection;
   }
 
-  // -------------------------------- Obtener la descripcion del producto --------------------------------
-  async getById(code) {
+  // -------------------------------- Obtener un producto por code --------------------------------
+  async getDescripcion(code) {
     let item = await this.model.findOne({ codigo: code });
+    return item;
+  }
+
+  // -------------------------------- Obtener un producto por id --------------------------------
+  async getById(id) {
+    let item = await this.model.findOne({ _id: id });
     return item;
   }
 

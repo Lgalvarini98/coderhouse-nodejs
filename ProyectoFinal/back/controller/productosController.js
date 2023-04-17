@@ -30,7 +30,7 @@ class productosController {
       if (!user) return res.status(401).json({ error: "Token inválido" });
 
       this.productosDaoMongoDB
-        .getById(req.params.codigo)
+        .getDescripcion(req.params.codigo)
         .then((result) => res.json(result))
         .catch((error) => res.json(error));
     });
