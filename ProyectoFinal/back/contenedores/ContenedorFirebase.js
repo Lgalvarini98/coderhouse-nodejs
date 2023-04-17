@@ -12,6 +12,7 @@ class ContenedorFireBase {
     this.query = this.db.collection(collectionName);
   }
 
+  // ----------------- Crea el carrito -----------------
   async add(item) {
     const querySnapshot = await this.query.get();
     let docs = querySnapshot.docs;
@@ -20,6 +21,7 @@ class ContenedorFireBase {
     await doc.create(item);
   }
 
+  // ----------------- Obtiene el carrito -----------------
   async getById(id) {
     let doc = this.query.doc(`${id}`);
 
@@ -27,18 +29,14 @@ class ContenedorFireBase {
     return item.data();
   }
 
-  async update(id, item) {
-    let doc = this.query.doc(`${id}`);
-    await doc.update(item);
-    return "item actualizado correctamente";
-  }
-
+  // ----------------- Eliminar carrito -----------------
   async delete(id) {
     let doc = this.query.doc(`${id}`);
     await doc.delete();
     return "item eliminado correctamente";
   }
 
+  // ----------------- Orden de compra -----------------
   async buy(products) {
     let mailOptions = {
       from: `Remitente ${process.env.EMAIL_USER}`,

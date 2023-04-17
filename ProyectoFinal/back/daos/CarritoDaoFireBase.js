@@ -6,19 +6,7 @@ class CarritoDaoFireBase extends contenedorFireBase {
     super("carritos");
   }
 
-  async getAll() {
-    const querySnapshot = await this.query.get();
-    let docs = querySnapshot.docs;
-    const response = docs.map((doc) => ({
-      id: doc.id,
-      nombre: doc.data().nombre,
-      timestamp: doc.data().timestamp,
-      products: doc.data().products,
-    }));
-
-    return response;
-  }
-
+  // ----------------- Agregar producto al carrito -----------------
   async addProduct(id, product) {
     const contenedorMongoDBasd = new ProductosDaoMongoDB();
     let productMongoDB = await contenedorMongoDBasd.getById(product.productId);
@@ -30,7 +18,7 @@ class CarritoDaoFireBase extends contenedorFireBase {
       codigo: productMongoDB.codigo,
       thumbnail: productMongoDB.thumbnail,
       precio: productMongoDB.precio,
-      stock: productMongoDB.stock,
+      categoria: productMongoDB.categoria,
     };
 
     let doc = this.query.doc(`${id}`);
@@ -39,9 +27,12 @@ class CarritoDaoFireBase extends contenedorFireBase {
 
     cpItem.products.push(productAdd);
 
+    console.log(cpItem);
+
     await doc.update(cpItem);
   }
 
+  // ----------------- Eliminar producto del carrito -----------------
   async deleteProduct(carritoId, productoId) {
     let doc = this.query.doc(`${carritoId}`);
     const item = await doc.get();

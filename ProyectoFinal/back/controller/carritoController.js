@@ -48,26 +48,11 @@ class carritoController {
       const user = verifyToken(token);
       if (!user) return res.status(401).json({ error: "Token inválido" });
 
-      // restar de stock
-
       this.carritoDaoFireBase
         .addProduct(req.params.id, req.body)
         .then((result) => res.json(result))
         .catch((error) => res.json(error));
     });
-
-    // this.carritoRouter.put("/carrito/:id", (req, res) => {
-    //   const token = req.headers.authorization;
-    //   if (!token) return res.status(401).json({ error: "No se ha proporcionado un token" });
-
-    //   const user = verifyToken(token);
-    //   if (!user) return res.status(401).json({ error: "Token inválido" });
-
-    //   this.carritoDaoFireBase
-    //     .update(req.params.id, req.body)
-    //     .then((result) => res.json(result))
-    //     .catch((error) => res.json(error));
-    // });
 
     // --------------------------------- Eliminar carrito ---------------------------------
     this.carritoRouter.delete("/carrito/:id", (req, res) => {

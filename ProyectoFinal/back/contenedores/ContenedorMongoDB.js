@@ -15,6 +15,7 @@ class ContenedorMongoDB {
     this.model = model;
   }
 
+  // -------------------------------- Crea un producto --------------------------------
   async add(item) {
     let collection = await this.getAll();
     item.id = collection.length;
@@ -23,26 +24,31 @@ class ContenedorMongoDB {
     return saveResponse;
   }
 
+  // -------------------------------- Obtener todos los productos --------------------------------
   async getAll() {
     let collection = await this.model.find({});
     return collection;
   }
 
+  // -------------------------------- Obtener la descripcion del producto --------------------------------
   async getById(id) {
     let item = await this.model.findOne({ _id: id });
     return item;
   }
 
+  // -------------------------------- Actualiza el producto --------------------------------
   async update(id, item) {
     let transactionObj = await this.model.findOneAndUpdate({ _id: id }, item);
     return transactionObj;
   }
 
+  // -------------------------------- Elimina el producto --------------------------------
   async delete(id) {
     let transactionObj = await this.model.deleteOne({ _id: id });
     return transactionObj;
   }
 
+  // -------------------------------- Obtener todos los productos de una categoria --------------------------------
   async getByCategoria(categoria) {
     let collection = await this.model.find({ categoria: categoria });
     return collection;
@@ -76,7 +82,7 @@ class ContenedorMongoDB {
 
     return saveResponse;
   }
-  /* ---------------------- REGISTER --------------------------- */
+  /* ---------------------- LOGIN --------------------------- */
   async login(item) {
     let collection = await this.getAll();
 

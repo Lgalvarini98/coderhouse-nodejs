@@ -35,7 +35,7 @@ class productosController {
         .catch((error) => res.json(error));
     });
 
-    // -------------------------------- Agrega un producto --------------------------------
+    // -------------------------------- Crea un producto --------------------------------
     this.productosRouter.post("/productos", (req, res) => {
       const token = req.headers.authorization;
       if (!token) return res.status(401).json({ error: "No se ha proporcionado un token" });

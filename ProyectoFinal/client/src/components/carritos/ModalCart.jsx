@@ -29,7 +29,7 @@ const ModalCart = (data, onHide) => {
                       <p className="precio bordes">
                         <strong>${product.precio}</strong>
                       </p>
-                      <h5 className="stock bordes">Stock: {product.stock}</h5>
+                      <h5 className="stock bordes">Categoria: {product.categoria}</h5>
                     </div>
                     <div className="">
                       <DelProdCart idProduct={product._id} />
