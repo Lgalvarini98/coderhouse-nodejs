@@ -37,16 +37,21 @@ const FilterByCategory = ({ setListProduct }) => {
   }, []);
 
   return (
-    <select className="categoryFilter" value={selectedCategory} onChange={handleChange}>
-      <option value="all">All</option>
-      {uniqueCategories.map((category) => {
-        return (
-          <option key={category} value={category}>
-            {category}
-          </option>
-        );
-      })}
-    </select>
+    <div className="categoryFilter">
+      <label htmlFor="category" className="me-3">
+        Category
+      </label>
+      <select value={selectedCategory} onChange={handleChange}>
+        <option value="all">All</option>
+        {uniqueCategories.map((category) => {
+          return (
+            <option key={category} value={category}>
+              {category}
+            </option>
+          );
+        })}
+      </select>
+    </div>
   );
 };
 

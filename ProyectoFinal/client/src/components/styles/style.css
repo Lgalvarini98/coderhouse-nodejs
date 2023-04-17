@@ -112,7 +112,9 @@ a:hover {
 }
 
 .categoryFilter {
-  width: 15%;
+  display: flex;
+  justify-content: center;
+  width: 25%;
   grid-column-start: span 4;
   text-transform: capitalize;
 }
