@@ -2,8 +2,8 @@
 2- Agregar el archivo .env en la carpeta "back" con los siguientes datos:
 
     PORT=8080
-    MONGO_PATH = "ruta de acceso a mongodb"
-    CREDENTIAL_PATH = "ruta de acceso al archivo de firebase que se guarda en la carpeta firebase"
+    MONGO_PATH = "mongodb+srv://coderhouse:E6xF3N7fU1g9krVI@cluster0.w6djkta.mongodb.net/?retryWrites=true&w=majority"
+    CREDENTIAL_PATH = "../firebase/ecommercech-57b78-firebase-adminsdk-35rpz-2809b9ad85.json"
 
     EMAIL_SERVICE = "hotmail"
     EMAIL_USER = "direccion que recibirá los mails enviados al registrar un usuario o comprar un carrito"
