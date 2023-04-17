@@ -49,7 +49,7 @@ io.on("connection", (socket) => {
   socket.on("enviar-mensaje", async (mensaje) => {
     const msgComplete = {
       ...mensaje,
-      receptor: process.env.EMAIL_RECEPTOR,
+      receptor: "coderhouse@gmail.com",
       fecha: Date.now(),
     };
     const msg = new Mensaje(msgComplete);

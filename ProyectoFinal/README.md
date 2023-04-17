@@ -21,7 +21,6 @@
     email: coderhouse@gmail.com
     password: coderhouse
 
-
 5- RUTAS:
 
     Ruta base: http://localhost:8080/api

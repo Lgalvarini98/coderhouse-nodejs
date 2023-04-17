@@ -23,7 +23,7 @@ const OrdenarCompra = ({ carrito }) => {
   }
 
   return (
-    <form className="borrarCarrito">
+    <form className="borrarCarrito" onClick={handleSubmit}>
       <h6>Comprar</h6>
       <a className="btn btn-success" href="/">
         <img
