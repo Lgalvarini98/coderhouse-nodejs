@@ -9,9 +9,9 @@ class productosController {
 
     // -------------------------------- Obtener todos los productos --------------------------------
     this.productosRouter.get("/productos", (req, res) => {
-      const token = req.headers.authorization;
+      const token = req.headers.authorization.substring(7);
       if (!token) return res.status(401).json({ error: "No se ha proporcionado un token" });
-
+      
       const user = verifyToken(token);
       if (!user) return res.status(401).json({ error: "Token inválido" });
 
