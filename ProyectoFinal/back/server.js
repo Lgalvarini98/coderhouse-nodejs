@@ -7,8 +7,6 @@ const http = require("http");
 const authRouter = require("./routes/authRoutes.js");
 const productRouter = require("./routes/productosRoutes.js");
 const carritoRouter = require("./routes/carritoRoutes.js");
-// const productosController = require("./controller/productosController.js");
-// const carritoController = require("./controller/carritoController.js");
 
 const app = express();
 const server = http.createServer(app);
@@ -31,12 +29,6 @@ app.use(cors());
 app.use("/api", authRouter);
 app.use("/api", productRouter);
 app.use("/api", carritoRouter);
-
-// const prdController = new productosController();
-// app.use("/api", prdController.getRouter());
-
-// const carrController = new carritoController();
-// app.use("/api", carrController.getRouter());
 
 server.listen(PORT, () => {
   console.log(`Servidor escuchando en el puerto ${PORT}`);

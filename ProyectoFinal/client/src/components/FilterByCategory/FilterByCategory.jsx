@@ -39,7 +39,7 @@ const FilterByCategory = ({ setListProduct }) => {
   return (
     <div className="categoryFilter">
       <label htmlFor="category" className="me-3">
-        Category
+        Filter by category
       </label>
       <select value={selectedCategory} onChange={handleChange}>
         <option value="all">All</option>
