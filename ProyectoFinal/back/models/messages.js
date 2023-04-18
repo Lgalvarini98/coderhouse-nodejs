@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const chatCollection = "chat";
+const chatCollection = "mensajes";
 
 const chatSchema = new mongoose.Schema({
   emisor: { type: String, required: true, max: 255 },
